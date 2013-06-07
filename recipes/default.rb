@@ -41,6 +41,7 @@ if ::URI.parse(omnibus_package).absolute?
     source omnibus_package
     checksum node['chef-server']['package_checksum'] if node['chef-server']['package_checksum']
     action :create
+    not_if { node['chef-server']['installed'] }
   end
 # else we assume it's on the local machine
 else
