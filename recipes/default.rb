@@ -57,6 +57,13 @@ package package_name do
             raise RuntimeError("I don't know how to install chef-server packages for platform family '#{node["platform_family"]}'!")
            end
   action :install
+  not_if { node['chef-server']['installed'] }
+end
+
+ruby_block "record successful installation" do
+  block do 
+    node['chef-server']['installed'] ||= true
+  end
 end
 
 # create the chef-server etc directory
