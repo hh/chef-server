@@ -63,8 +63,9 @@ end
 
 ruby_block "record successful installation" do
   block do 
-    node['chef-server']['installed'] ||= true
+    node.set['chef-server']['installed'] = true
   end
+  not_if node['chef-server']['installed']
 end
 
 # create the chef-server etc directory
